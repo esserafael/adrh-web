@@ -137,6 +137,9 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# VSCode
+.vscode
+
 # Xunda
 /flask_session
 /quart_session
