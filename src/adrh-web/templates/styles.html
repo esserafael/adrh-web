@@ -1,0 +1,406 @@
+<style>
+    @font-face {
+      font-family: 'NeoSansStd-Regular';
+      src: url('.{{ url_for('static', filename='fonts/NeoSansStdRegular.eot') }}');
+      src: url('.{{ url_for('static', filename='fonts/NeoSansStdRegular.otf') }}'),
+           url('.{{ url_for('static', filename='fonts/NeoSansStdRegular.ttf') }}');
+      font-weight: normal;
+      font-style: normal;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+     
+    /* Add a blue text color to links */
+    a {
+      color: black;
+    }   
+
+    a:link {
+        text-decoration: none;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .atitle:hover {
+        text-decoration: none;
+    }
+
+    a:active {
+        text-decoration: none;
+    }
+
+    /* Header Bar */
+    .headerbar {
+        position: fixed;
+        margin: 0;        
+        top: 0;
+        left: 0;
+        height: 48px;
+        width: 100%;
+        line-height: 48px;
+        background-color: #1E1900;
+        z-index: 1;
+    }
+
+    .headerbar_picme {
+        margin: 0;
+        top: 0;
+        right: 0;
+        padding: 8px;
+        height: 48px;
+        width: 48px;
+        float: right;
+        transition: background-color .2s
+            ease-in-out; 
+    }
+
+    .headerbar_picme:hover {
+        background-color: #fd0;
+    }
+
+    .headerbar_picme_img{
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+    }
+
+    /* Login page */
+    .bodylogin {
+      font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+      background-color: #fd0;
+      text-align: center;
+    }
+    
+    .login_outer {
+        display: table;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .login_middle {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .login_inner {
+        margin-left:auto;
+        margin-right:auto;
+        position: relative;
+        max-width: 440px;
+        width: calc(100% - 40px);
+        padding:44px;
+        margin-bottom:28px;
+        background-color:#fff;
+        -webkit-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        -moz-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        min-width: 320px;
+        min-height: 338px;
+        overflow:hidden
+    }
+
+    @media (max-width: 600px), (max-height: 366px) {
+        .bodylogin {
+            background-color: #fff;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .login_outer {
+            position: none;
+            top: 0px;
+            left: 0px;
+        }
+        
+        .login_middle {
+            vertical-align: top;
+        }
+
+        .login_inner {
+            padding: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            box-shadow: none;
+            border: 0;
+        }
+    }
+
+    .imglogo {
+        width: 150px;
+        height: 114px;
+    }
+
+    /* Main */
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+      background-color: #fd0;
+      margin: 0;
+    }
+
+     /* Add padding to containers */
+    .main_outer {
+        padding-top: 48px;
+        display: table;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .main_title {
+        margin-left:auto;
+        margin-right:auto;
+        position:relative;
+        max-width:90%;
+        width:90%;
+    }
+
+    .main_inner {
+        margin-left:auto;
+        margin-right:auto;
+        position:relative;
+        max-width:90%;
+        width:90%;
+        padding:44px;
+        margin-bottom:28px;
+        background-color:#fff;
+        -webkit-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        -moz-box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        box-shadow:0 2px 6px rgba(0,0,0,0.2);
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+        min-width:320px;
+        min-height:338px;
+        overflow:hidden
+    }
+
+    .main_rightlink {
+        float: right;
+    }
+
+    @media (max-width: 600px), (max-height: 366px) {
+        .body {
+            background-color: #fff;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .main_outer {
+            position: none;
+            top: 0px;
+            left: 0px;
+        }
+        
+        .main_middle {
+            vertical-align: top;
+        }
+
+        .main_inner {
+            padding: 24px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            box-shadow: none;
+            border: 0;
+        }
+
+        .main_rightlink {
+            float: right;
+            font-size: small;
+        }
+    }
+
+    /* Index Page */
+    .tiles {
+        padding: 20px;
+        height: 180px;
+        display: flex;
+        flex-wrap: wrap;
+        /*background-color: #1fb40b;*/
+    }
+
+    .animated-tile {
+        text-align: center;
+        margin: 10px;
+        padding: 5px;
+        position: relative;
+        -webkit-animation: all 50ms
+            cubic-bezier(.1,.9,.2,1);
+        animation: all 50ms
+            cubic-bezier(.1,.9,.2,1);
+        position: relative;
+        float: left;
+        display: inline-block;
+        transition: outline .125s
+            ease-in-out,transform 0.125s
+            ease-in-out,-webkit-transform .125s
+            ease-in-out;
+        transition: background-color .1s
+            ease-in, 
+                    height .1s
+            ease-in-out;
+        height: 130px;
+        width: 130px;
+        /*background-color:#fd0*/
+    }
+
+    .animated-tile:hover {
+        height: 140px;
+        -webkit-box-shadow:0 4px 12px rgba(0,0,0,0.2);
+        -moz-box-shadow:0 4px 12px rgba(0,0,0,0.2);
+        box-shadow:0 4px 12px rgba(0,0,0,0.2);
+        background-color:whitesmoke
+    }
+
+    /*.animated-tile:hover .img-create {
+        transition: width .1s
+            ease-in-out, 
+                    height .1s
+            ease-in-out;
+        height: 67px;
+        width: 73px;
+    }*/
+
+    .tile-img{
+        padding: 7%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img-create {
+        height: 64px;
+        width: 70px;
+    }
+
+    .tile-name{
+        position: absolute;
+        bottom: 0px;
+        padding: 5%;
+        width: 90%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+      background-color: white;
+      width: 85%;
+      margin: auto;
+    }
+    
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+      font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+    
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    select {
+        font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+        padding: 5px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        background: #f1f1f1;
+    }
+
+    select:focus {
+        background-color: #ddd;
+        font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+        padding: 5px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+    }
+    
+    /* Overwrite default styles of hr */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+
+     /* Add padding to containers */
+     .bt {
+      padding: 0px;
+    }
+    
+    /* Set a style for the submit button */
+    .btn {
+      font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+      font-size: x-large;
+      background-color: #1fb40b;
+      color: white;
+      display: block; 
+      margin: 0 auto;      
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 75%;
+      opacity: 0.9;
+    }
+    
+    .btn:hover {
+      opacity: 1;
+    }
+
+    .save {
+        text-align: center;
+    }
+
+    table {
+        font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+        border-collapse: collapse;
+        width: 70%;
+        margin: auto;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .td-left {
+        text-align: right;
+        width: 30%;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+      background-color: black;
+      text-align: center;
+    }
+
+    .footer {
+        text-align: center;
+        font-size: small;
+    }
+</style>

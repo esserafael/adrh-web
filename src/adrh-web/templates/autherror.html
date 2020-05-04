@@ -1,0 +1,28 @@
+{% include "head.html" %}
+    {% block body %}
+    <body class="bodylogin">
+        <div class="login_outer"> 
+            <div class="login_middle">
+                <div class="login_inner">
+                    <img class="imglogo" role="img" alt="Logo da Uniasselvi" src='.{{ url_for('static', filename='assets/logo-bw.png') }}'>
+                    {% include "title.html" %}
+                    <h2>Falha de Login</h2>
+                        <dl>
+                            {% if "AADSTS50105" in result.get("error_description") %}
+                                <dt style="color: tomato;">Acesso Negado</dt>
+                            {% endif %}
+                            <hr>
+                            {% if result.get("error") == 'interaction_required'  %}
+                                <dt>Interação necessária:</dt>
+                            {% endif %}                            
+                            <dt style="font-size: small;">{{ result.get("error_description") }}</dt>
+                        </dl>
+                        <hr>
+                        <a href="{{ url_for('index') }}">Vá para Login</a>
+                </div>
+            </div>            
+        </div>
+    </body>
+    {% endblock %}
+</html>
+

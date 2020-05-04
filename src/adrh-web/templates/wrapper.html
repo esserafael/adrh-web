@@ -1,0 +1,25 @@
+{% include "head.html" %}
+{% block body %}
+{% with messages = get_flashed_messages() %}    
+    {% if messages %} 
+      <body onload="alert_user({{ messages }})">
+    {% else %}
+      <body>
+    {% endif %}
+    {{ messages }}
+{% endwith %}
+{% include "headerbar.html" %}
+    <div class="main_outer">
+        <div class="main_title">
+            {% include "title.html" %}  
+        </div>      
+        <div class="main_inner">
+           {% include content %}
+        </div>
+        <div class="main_title">
+            {% include "footer.html" %}
+        </div>           
+    </div>
+</body>
+{% endblock %}
+</html>
