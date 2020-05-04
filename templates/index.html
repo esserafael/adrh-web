@@ -1,0 +1,22 @@
+<h2>Bem-vindo, {{ user_basic_data["givenName"] }}.</h2>
+<hr>
+<div class="tiles">    
+  <a class="alink" href="/create">
+    <div class="animated-tile">
+      <div class="tile-name">Criar Nova Conta</div>
+    </div>
+  </a>
+  <a class="alink" href="/upload">
+    <div class="animated-tile">
+      <div class="tile-name">Criação em Lote</div>
+    </div>
+  </a>    
+</div>
+<hr>
+<!--<li><a href="/upload">Criar Novas Contas em Lote</a></li>-->
+
+{% if config.get("ENDPOINT") %}
+  <!--<li><a href='/graphcall'>Call Microsoft Graph API</a></li>-->
+{% endif %}
+
+<li><a href="/logout">Logout</a></li>

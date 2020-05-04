@@ -1,0 +1,24 @@
+{% include "head.html" %}
+    {% block body %}
+    <body class="bodylogin">
+        <div class="login_outer"> 
+            <div class="login_middle">
+                <div class="login_inner">
+                    <img class="imglogo" role="img" alt="Logo da Uniasselvi" src='.{{ url_for('static', filename='assets/logo-bw.png') }}'>
+                    {% include "title.html" %}
+                    <h2>Falha de Login</h2>
+                        <dl>
+                            {% if result.get("error") == 'interaction_required'  %}
+                                <dt>Interação necessária:</dt>
+                            {% endif %}
+                            <dd>{{ result.get("error_description") }}</dd>
+                        </dl>
+                        <hr>
+                        <a href="{{ url_for('index') }}">Homepage</a>
+                </div>
+            </div>            
+        </div>
+    </body>
+    {% endblock %}
+</html>
+

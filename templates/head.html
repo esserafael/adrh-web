@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<title>ADRH Web - Uniasselvi</title>
+{% with messages = get_flashed_messages() %}  
+    {% if messages %} 
+      <head onload="alert_user({{ messages }})">
+    {% else %}
+      <head>
+    {% endif %}
+{% endwith %}
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    {% include "styles.html" %}
+    <script>
+      function alert_user(message) {
+        alert(message);
+      }
+    </script>
+</head>
