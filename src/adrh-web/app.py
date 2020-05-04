@@ -1,16 +1,12 @@
 from _version import __version__
 import os
-from datetime import datetime
 import base64
 import uuid
-import re
 import requests
 from ast import literal_eval
-import json
-#from flask import Flask, render_template, session, request, redirect, url_for, flash
 from quart import Quart, render_template, session, request, redirect, url_for, flash
+from quart_session import Session
 from werkzeug.utils import secure_filename
-from quart_session import Session  # https://pythonhosted.org/Flask-Session
 import msal
 import app_config
 
@@ -160,7 +156,7 @@ def graphcall():
     token = _get_token_from_cache(app_config.SCOPE)
     if not token:
         return redirect(url_for("login"))
-    graph_data = get_graph_data("https://graph.microsoft.com/v1.0/me/").json()
+    graph_data = _get_graph_data("https://graph.microsoft.com/v1.0/me/").json()
     return render_template('display.html', result=graph_data)
 
 @app.errorhandler(404)
@@ -219,7 +215,7 @@ async def _render_custom_template(file, user_basic_data, **context):
         user_basic_data=literal_eval(user_basic_data.decode('utf8')),
         version=__version__,
         **context
-        ) 
+        )
 
 app.jinja_env.globals.update(_build_auth_url=_build_auth_url)  # Used in template
 
