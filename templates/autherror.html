@@ -8,13 +8,17 @@
                     {% include "title.html" %}
                     <h2>Falha de Login</h2>
                         <dl>
+                            {% if "AADSTS50105" in result.get("error_description") %}
+                                <dt style="color: tomato;">Acesso Negado</dt>
+                            {% endif %}
+                            <hr>
                             {% if result.get("error") == 'interaction_required'  %}
                                 <dt>Interação necessária:</dt>
-                            {% endif %}
-                            <dd>{{ result.get("error_description") }}</dd>
+                            {% endif %}                            
+                            <dt style="font-size: small;">{{ result.get("error_description") }}</dt>
                         </dl>
                         <hr>
-                        <a href="{{ url_for('index') }}">Homepage</a>
+                        <a href="{{ url_for('index') }}">Vá para Login</a>
                 </div>
             </div>            
         </div>

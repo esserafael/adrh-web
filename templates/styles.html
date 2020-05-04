@@ -233,6 +233,7 @@
     }
 
     .animated-tile {
+        text-align: center;
         margin: 10px;
         padding: 5px;
         position: relative;
@@ -262,7 +263,28 @@
         -moz-box-shadow:0 4px 12px rgba(0,0,0,0.2);
         box-shadow:0 4px 12px rgba(0,0,0,0.2);
         background-color:whitesmoke
-    }    
+    }
+
+    /*.animated-tile:hover .img-create {
+        transition: width .1s
+            ease-in-out, 
+                    height .1s
+            ease-in-out;
+        height: 67px;
+        width: 73px;
+    }*/
+
+    .tile-img{
+        padding: 7%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .img-create {
+        height: 64px;
+        width: 70px;
+    }
 
     .tile-name{
         position: absolute;
@@ -296,6 +318,22 @@
     input[type=text]:focus, input[type=password]:focus {
       background-color: #ddd;
       outline: none;
+    }
+
+    select {
+        font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+        padding: 5px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        background: #f1f1f1;
+    }
+
+    select:focus {
+        background-color: #ddd;
+        font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+        padding: 5px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
     }
     
     /* Overwrite default styles of hr */
@@ -331,6 +369,28 @@
 
     .save {
         text-align: center;
+    }
+
+    table {
+        font-family: 'NeoSansStd-Regular', Helvetica, Arial, sans-serif;
+        border-collapse: collapse;
+        width: 70%;
+        margin: auto;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .td-left {
+        text-align: right;
+        width: 30%;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
     }
     
     /* Set a grey background color and center the text of the "sign in" section */

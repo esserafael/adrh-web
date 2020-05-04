@@ -21,7 +21,8 @@ REDIRECT_PATH = "/auth"  # It will be used to form an absolute URL
 # https://docs.microsoft.com/en-us/graph/permissions-reference
 SCOPE = ["User.ReadBasic.All"]
 
-SESSION_TYPE = "filesystem"  # So token cache will be stored in server-side session
+SESSION_TYPE = "memcached"  # So token cache will be stored in server-side session
+SESSION_TIMEOUT = 3600
 
 PAGE_WRAPPER = "wrapper.html"
 

@@ -1,20 +1,44 @@
-<form action="/create/save"></form>
-    <a href="javascript:window.history.go(-1)">Voltar</a>
+<form method=post enctype=application/x-www-form-urlencoded action="/create">
+    <a href="/">Voltar</a>
     <a class="main_rightlink" href="/upload">Ir para Criação em lote</a>
 
     <h2>Criação de Nova Conta</h2>
     <p>Por favor preencha o formulário para a criação da conta.</p>
     <hr>
 
-    <label for="email"><b>Nome completo</b></label>
-    <input type="text" placeholder="Ex: Fulano de Tal" name="email" required>
+    <label for="gn"><b>Nome:</b></label>
+    <input type="text" placeholder="Ex.: Leonardo" name="gn" required>
 
-    <label for="psw"><b>CPF</b></label>
-    <input type="text" placeholder="075.745.349-00" name="psw" required>
+    <label for="surname"><b>Sobrenome:</b></label>
+    <input type="text" placeholder="Ex.: Da Vinci" name="surname" required>
 
-    <label for="psw-repeat"><b>Departamento</b></label>
-    <input type="text" placeholder="Tecnologia da Informação" name="psw-repeat" required>
+    <label for="cpf"><b>CPF:</b></label>
+    <input type="text" placeholder="000.111.222-33" name="cpf" required>
+
+    <label for="email"><b>E-mail:</b></label>
+    <input type="text" placeholder="leonardo.davinci@uniasselvi.com.br" name="email" required>
+
+    <label for="department"><b>Departamento:</b></label>
+    <input type="text" placeholder="Ex.: Tecnologia da Informação" name="department" required>
+
+    <label for="gestor"><b>Gestor:</b></label>
+    <input type="text" placeholder="Ex.: Ludovico Sforza" name="gestor" required>
+
+    <label for="perm"><b>Permissão:</b></label>
+    <select id="perm" name="perm" required>
+        <option value="volvo">Volvo</option>
+    </select>
+
     <hr>
+
+    <label for="cel"><b>Celular:</b></label>
+    <input type="text" placeholder="Ex.: 47-99999-0000" name="cel" required>
+
+    <label for="altemail"><b>E-mail alternativo:</b></label>
+    <input type="text" placeholder="leonardo@gmail.com" name="altemail" required>
+
+    <hr>
+
     <div class="bt">
         <button type="submit" class="btn">Criar Conta</button>
     </div>
