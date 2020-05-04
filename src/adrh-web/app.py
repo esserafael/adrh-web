@@ -166,7 +166,7 @@ def graphcall():
 @app.errorhandler(404)
 async def page_not_found(e):
     # note that we set the 404 status explicitly
-    return await render_template('404.html'), 404
+    return await render_template('error/404.html'), 404
 
 async def _build_auth_url(authority=None, scopes=None, state=None):
     return (await _build_msal_app(authority=authority)).get_authorization_request_url(
