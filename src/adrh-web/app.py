@@ -111,7 +111,6 @@ async def create_save():
 
 @app.route("/upload", methods=['GET', 'POST'])
 async def upload():
-
     async def _allowed_file(filename):
         return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app_config.ALLOWED_EXTENSIONS
@@ -129,8 +128,9 @@ async def upload():
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
-            await flash('Nenhum arquivo selecionado, por favor tente novamente.')
-            return redirect(request.url)
+            #await flash('Nenhum arquivo selecionado, por favor tente novamente.')
+            #return redirect(request.url)
+            return await _render_custom_template("upload.html", alert='Nenhum arquivo selecionado, por favor tente novamente.')
         if not await _allowed_file(file.filename):
             await flash('Somente arquivos Excel (.xlsx) ou Separados por vírgulas (.csv) podem ser enviados.')
             return redirect(request.url)
@@ -208,11 +208,12 @@ async def _get_graph_data(endpoint):
     return graph_data
 
 async def _render_custom_template(file, user_basic_data, **context):
-    print(context)
+    session = app.session_interface 
     return await render_template(
         app_config.PAGE_WRAPPER,
         content=file,
         user_basic_data=literal_eval(user_basic_data.decode('utf8')),
+        #user_basic_data=literal_eval((await session.get("me_data")).decode('utf8')),
         version=__version__,
         **context
         )
