@@ -22,7 +22,7 @@ async def index():
     if not await session.get("user"):
         return redirect(url_for("login"))
     me_data = await session.get("me_data")
-    return await _render_custom_template("index.html", me_data)
+    return await _render_custom_template("index.html")
 
 @app.route("/login")
 async def login():
@@ -83,7 +83,6 @@ async def create():
     session = app.session_interface
     if not await session.get("user"):
         return redirect(url_for("login"))
-    me_data = await session.get("me_data")
     if request.method == 'POST':
         form_data = await request.form
         print(form_data["surname"])
@@ -98,16 +97,15 @@ async def create():
             "cel": "Celular",
             "altemail": "E-mail alternativo"
         }
-        return await _render_custom_template("save.html", me_data, result="Conta criada com sucesso!", new_user_data=form_data, switcher=switcher)
-    return await _render_custom_template("create.html", me_data)
+        return await _render_custom_template("save.html", result="Conta criada com sucesso!", new_user_data=form_data, switcher=switcher)
+    return await _render_custom_template("create.html")
 
 @app.route("/create/save", methods=['GET', 'POST'])
 async def create_save():
     session = app.session_interface
     if not await session.get("user"):
         return redirect(url_for("login"))
-    me_data = await session.get("me_data")
-    return await _render_custom_template("save.html", me_data, result="Conta criada com sucesso!")
+    return await _render_custom_template("save.html", result="Conta criada com sucesso!")
 
 @app.route("/upload", methods=['GET', 'POST'])
 async def upload():
@@ -122,8 +120,7 @@ async def upload():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in  await request.files:
-            await flash('Sem arquivo na solicitação de envio.')
-            return redirect(request.url)
+            return await _render_custom_template("upload.html", alert='Sem arquivo na solicitação de envio.')
         file = (await request.files)['file']
         # if user does not select file, browser also
         # submit an empty part without filename
@@ -132,8 +129,8 @@ async def upload():
             #return redirect(request.url)
             return await _render_custom_template("upload.html", alert='Nenhum arquivo selecionado, por favor tente novamente.')
         if not await _allowed_file(file.filename):
-            await flash('Somente arquivos Excel (.xlsx) ou Separados por vírgulas (.csv) podem ser enviados.')
-            return redirect(request.url)
+            #await flash('Somente arquivos Excel (.xlsx) ou Separados por vírgulas (.csv) podem ser enviados.')
+            return await _render_custom_template("upload.html", alert='Somente arquivos Excel (.xlsx) ou Separados por vírgulas (.csv) podem ser enviados.')
         if file and await _allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filename_withid = "{}_{}.{}".format(
@@ -141,14 +138,13 @@ async def upload():
                 (literal_eval(me_data.decode('utf8')))['mail'],
                 filename.rsplit('.', 1)[1].lower()
                 )
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename_withid))
+            file.save(os.path.normpath(os.path.join(app.config['UPLOAD_FOLDER'], filename_withid)))
             return await _render_custom_template(
                 "save.html",
-                me_data,
                 result="Arquivo '{}' enviado com sucesso!".format(filename),
                 filename=filename
                 )
-    return await _render_custom_template("upload.html", me_data)
+    return await _render_custom_template("upload.html")
 
 
 @app.route("/graphcall")
@@ -207,13 +203,13 @@ async def _get_graph_data(endpoint):
         )
     return graph_data
 
-async def _render_custom_template(file, user_basic_data, **context):
+async def _render_custom_template(file, **context):
     session = app.session_interface 
     return await render_template(
         app_config.PAGE_WRAPPER,
         content=file,
-        user_basic_data=literal_eval(user_basic_data.decode('utf8')),
-        #user_basic_data=literal_eval((await session.get("me_data")).decode('utf8')),
+        #user_basic_data=literal_eval(user_basic_data.decode('utf8')),
+        user_basic_data=literal_eval((await session.get("me_data")).decode('utf8')),
         version=__version__,
         **context
         )
