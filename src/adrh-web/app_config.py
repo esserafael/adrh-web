@@ -22,6 +22,7 @@ REDIRECT_PATH = "/auth"  # It will be used to form an absolute URL
 SCOPE = ["User.ReadBasic.All"]
 
 SESSION_TYPE = "memcached"  # So token cache will be stored in server-side session
+SESSION_PROTECTION = True
 SESSION_TIMEOUT = 3600
 
 PAGE_WRAPPER = "wrapper.html"
