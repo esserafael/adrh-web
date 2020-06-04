@@ -1,25 +1,44 @@
 {% include "head.html" %}
 {% block body %}
-{% with messages = get_flashed_messages() %}    
-    {% if messages %} 
-      <body onload="alert_user({{ messages }})">
-    {% else %}
-      <body>
-    {% endif %}
-    {{ messages }}
-{% endwith %}
+<body onload="load_alert(); close_alert()">
 {% include "headerbar.html" %}
     <div class="main_outer">
         <div class="main_title">
-            {% include "title.html" %}  
+            {% include "title.html" %}
+            {% if alert %}
+                <div class="alert">
+                    <span class="closebtn">&times;</span>  
+                    <strong>Ops!</strong> {{ alert }}
+                </div>                
+            {% endif %}
         </div>      
         <div class="main_inner">
-           {% include content %}
+            {% include content %}
         </div>
         <div class="main_title">
             {% include "footer.html" %}
         </div>           
     </div>
+    <script>
+        function load_alert(){
+            var open = document.getElementsByClassName("alert")
+            var i;
+            for (i = 0; i < open.length; i++) {
+                open[i].style.opacity = "1";
+            }
+        }
+        function close_alert(){
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+            for (i = 0; i < close.length; i++) {
+            close[i].onclick = function(){
+                    var div = this.parentElement;
+                    div.style.opacity = "0";
+                    setTimeout(function(){ div.style.display = "none"; }, 600);
+                }
+            }          
+        }      
+    </script>
 </body>
 {% endblock %}
 </html>
